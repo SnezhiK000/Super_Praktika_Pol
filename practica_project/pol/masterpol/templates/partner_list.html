@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мастер пол</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="header-logo">
+        <img src="{% static 'images/logo.png' %}" alt="Мастер Пол" class="logo">
+        <div class="logo-text">Мастер пол</div>
+    </div>
+
+    <div class="buttons-container">
+        <a href="{% url 'add' %}" class="btn-soft-beige">Добавить партнера</a>
+        <a href="{% url 'history' %}" class="btn-soft-beige">История партнера</a>
+        <a href="{% url 'show_partners' %}" class="btn-soft-beige">Посмотреть партнеров</a>
+        <a href="{% url 'edit_partner' %}" class="btn-soft-beige">Редактировать партнёра</a>
+        <a href="{% url 'login' %}" class="btn-soft-beige">Вход</a>
+    </div>
+
+    <div class="main-container">  <!-- Вывод партнеров -->
+        <h1><a>Партнеры</a></h1>
+        <div class="partners-grid">
+            {% for partner in partners %}
+            <div class="partner-card">
+                <h3>{{ partner.partner_name }}</h3>
+                <p class="info-text">{{ partner.partner_type }} | {{ partner.partner_name }}</p>
+                <div class="info-row">
+                    <div class="info-text">
+                        <p>{{ partner.director }}</p>
+                        <p>{{ partner.phone }}</p>
+                        <p>Рейтинг: {{ partner.rating }}</p>
+                    </div>
+                    <div class="procents"> {{ partner.procent }}%</div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

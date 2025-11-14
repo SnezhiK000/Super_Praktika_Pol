@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить партнёра</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Логотип и название слева -->
+    <div class="header-logo">
+        <img src="{% static 'images/logo.png' %}" alt="Мастер Пол" class="logo">
+        <div class="logo-text">Мастер пол</div>
+    </div>
+
+    <!-- Кнопки слева -->
+    <div class="buttons-container">
+        <a href="{% url 'add' %}" class="btn-soft-beige">Добавить партнера</a>
+        <a href="{% url 'history' %}" class="btn-soft-beige">История партнера</a>
+        <a href="{% url 'show_partners' %}" class="btn-soft-beige">Посмотреть партнеров</a>
+        <a href="{% url 'edit_partner' %}" class="btn-soft-beige">Редактировать партнёра</a>
+        <a href="{% url 'login' %}" class="btn-soft-beige">Вход</a>
+    </div>
+
+    <div class="main-container">
+        <h1>Добавить партнёра</h1>
+
+        <div class="form-container">
+            <form method="post">  <!-- Метод для принятия значений и защищенного изменения-->
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="inn" class="form-label">ИНН</label>
+                    <input type="text" id="inn" name="inn" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="partner_type" class="form-label">Тип партнёра</label>
+                    <select id="partner_type" name="partner_type" class="form-select" required>
+                        <option value="">Нажмите для выбора типа</option> <!-- выпадающий списко для выбора типа партнера-->
+                        {% for ptype in partner_types %}
+                        <option value="{{ ptype.id_partner_type }}">{{ ptype.partner_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="partner_name" class="form-label">Наименование партнёра</label>
+                    <input type="text" id="partner_name" name="partner_name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="director" class="form-label">Директор</label>
+                    <input type="text" id="director" name="director" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Телефон</label>
+                    <input type="text" id="phone" name="phone" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating" class="form-label">Рейтинг</label>
+                    <input type="number" id="rating" name="rating" class="form-input" required min="0" max="100">
+                </div>
+
+                <div class="form-group"> <!-- выпадающий списко для выбора региона партнера-->
+                    <label for="region" class="form-label">Регион</label>
+                    <select id="region" name="region" class="form-select" required>
+                        <option value="">Нажмите для выборара региона</option>
+                        {% for region in regions %}
+                        <option value="{{ region.region_code }}">{{ region.region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group"> <!-- выпадающий списко для выбора населеного пункта партнера-->
+                    <label for="settlement" class="form-label">Населенный пункт</label>
+                    <select id="settlement" name="settlement" class="form-select" required>
+                        <option value="">Нажмите для выбора населеного пункта</option>
+                        {% for settlement in settlements %}
+                        <option value="{{ settlement.id }}">{{ settlement.settlement }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group"> <!-- выпадающий списко для выбора улицы партнера-->
+                    <label for="street" class="form-label">Улица</label>
+                    <select id="street" name="street" class="form-select" required>
+                        <option value="">Нажмите для выбора улицы</option>
+                        {% for street in streets %}
+                        <option value="{{ street.id }}">{{ street.street }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group"> <!-- выпадающий списко для выбора дома партнера-->
+                    <label for="house" class="form-label">Дом</label>
+                    <select id="house" name="house" class="form-select" required>
+                        <option value="">Нажмите для выбора дома</option>
+                        {% for house in houses %}
+                        <option value="{{ house.id }}">{{ house.house }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="form-submit">Сохранить партнёра</button> <!-- кнопка сохранения партнера-->
+            </form>
+        </div>
+    </div>
+</body>
+</html>

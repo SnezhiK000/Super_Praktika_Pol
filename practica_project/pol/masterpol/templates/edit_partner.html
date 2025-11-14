@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать партнёра</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Логотип и название слева -->
+    <div class="header-logo">
+        <img src="{% static 'images/logo.png' %}" alt="Мастер Пол" class="logo">
+        <div class="logo-text">Мастер пол</div>
+    </div>
+
+    <!-- Кнопки слева -->
+    <div class="buttons-container">
+        <a href="{% url 'add' %}" class="btn-soft-beige">Добавить партнера</a>
+        <a href="{% url 'history' %}" class="btn-soft-beige">История партнера</a>
+        <a href="{% url 'show_partners' %}" class="btn-soft-beige">Посмотреть партнеров</a>
+        <a href="{% url 'edit_partner' %}" class="btn-soft-beige">Редактировать партнёра</a>
+        <a href="{% url 'login' %}" class="btn-soft-beige">Вход</a>
+    </div>
+
+    <div class="main-container">
+        <h1>Редактировать партнёра</h1>
+
+        <!-- Форма выбора партнёра -->
+        <form method="get">
+            <div class="form-container">
+                <label for="partner-select" class="form-label">Выберите партнёра:</label>
+                <select name="partner_id" id="partner-select" class="form-select" onchange="this.form.submit()">
+                    <option value="">Нажмите для выбора партера для редактирования</option>
+                    {% for partner in partners %}
+                    <option value="{{ partner.inn }}" {% if selected_partner and selected_partner.inn == partner.inn %}selected{% endif %}> <!-- Выбор партнера по его ID -->
+                        {{ partner.partner_name }} ({{ partner.director }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+        {% if selected_partner %}
+        <h2>Редактировать: {{ selected_partner.partner_name }}</h2>
+
+        <div class="edit-form-container">
+            <form method="post"> <!-- Метод для принятия значений и защищенного изменения-->
+                {% csrf_token %}
+
+                <input type="hidden" name="partner_id" value="{{ selected_partner.inn }}">
+
+                <div class="form-group">
+                    <label for="partner_name" class="form-label">Наименование партнёра</label>
+                    <input type="text" id="partner_name" name="partner_name" class="form-input" value="{{ selected_partner.partner_name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="director" class="form-label">Директор</label>
+                    <input type="text" id="director" name="director" class="form-input" value="{{ selected_partner.director }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" value="{{ selected_partner.email }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Телефон</label>
+                    <input type="text" id="phone" name="phone" class="form-input" value="{{ selected_partner.phone }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating" class="form-label">Рейтинг</label>
+                    <input type="number" id="rating" name="rating" class="form-input" value="{{ selected_partner.rating }}" required min="0" max="100"> <!-- Диапозон для рейтинга-->
+                </div>
+
+                <button type="submit" class="form-submit">Сохранить изменения</button>
+            </form>
+        </div>
+
+        {% elif request.GET.partner_id %} <!-- Проверяю что если все-таки партнер не найден по его ID, то выведу сообщение об этом-->
+        <p class="no-partner">Партнёр не найден.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

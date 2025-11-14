@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Логотип и название слева */
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0 20px 30px; /* Слева отступ */
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+/* текст для логотипа*/
+.logo-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+/* Кнопки слева */
+.buttons-container {
+    margin: 0 0 30px 30px;
+}
+
+/* для кнопочек */
+.btn-soft-beige {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 8px 10px 8px 0;
+    background-color: #f4e8d3;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-soft-beige:hover {
+    background-color: #e8dbbf;
+    transform: translateY(-2px);
+}
+
+/* Основной контейнер */
+.main-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #000000;
+    font-size: 28px;
+    font-weight: 600;
+    border-bottom: 2px solid #f4e8d3;
+    padding-bottom: 8px;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: #5d4a3a;
+}
+
+/* Форма выбора партнёра / добавления партнёра / редактирования */
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.form-select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #f4e8d3;
+    box-shadow: 0 0 0 3px rgba(244, 232, 211, 0.4);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-submit {
+    background-color: #67BA80;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-submit:hover {
+    background-color: #45a049;
+}
+
+/* Сетка карточек: партнёры или товары */
+.partners-grid,
+.products-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* Карточка партнёра */
+.partner-card {
+    background-color: #f4e8d3;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.partner-card h3 {
+    margin: 0 0 12px 0;
+    color: #3a2d20;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.partner-card p {
+    margin: 8px 0;
+    color: #000000;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.partner-card p:last-child {
+    margin-bottom: 0;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-text {
+    flex: 1;
+}
+
+.procents {
+    color: #67BA80;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    min-width: 50px;
+}
+
+/* Карточка товара */
+.product-card {
+    background-color: #f4e8d3;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.product-card h3 {
+    margin: 0 0 12px 0;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.product-card p {
+    margin: 8px 0;
+    color: #000000;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.product-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Сообщение, если нет товаров или партнёра */
+.no-products,
+.no-partner {
+    text-align: center;
+    padding: 40px;
+    color: #000000;
+    font-style: italic;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* для цвета текста */
+.no-partner {
+    color: #000000;
+}

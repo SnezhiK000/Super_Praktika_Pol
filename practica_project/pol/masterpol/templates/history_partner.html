@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>История партнёра</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Логотип и название слева -->
+    <div class="header-logo">
+        <img src="{% static 'images/logo.png' %}" alt="Мастер Пол" class="logo">
+        <div class="logo-text">Мастер пол</div>
+    </div>
+
+    <!-- Кнопки слева -->
+    <div class="buttons-container">
+        <a href="{% url 'add' %}" class="btn-soft-beige">Добавить партнера</a>
+        <a href="{% url 'history' %}" class="btn-soft-beige">История партнера</a>
+        <a href="{% url 'show_partners' %}" class="btn-soft-beige">Посмотреть партнеров</a>
+        <a href="{% url 'edit_partner' %}" class="btn-soft-beige">Редактировать партнёра</a>
+        <a href="{% url 'login' %}" class="btn-soft-beige">Вход</a>
+    </div>
+
+    <div class="main-container">
+        <h1>История партнера</h1>
+
+        <!-- Форма выбора партнёра -->
+        <form method="get">
+            <div class="form-container">
+                <label for="partner-select" class="form-label">Выберите партнера:</label>
+                <select name="partner_id" id="partner-select" class="form-select" onchange="this.form.submit()">
+                    <option value="">Выбери партнера для показа истории</option>
+                    {% for partner in partners %}
+                    <option value="{{ partner.inn }}" {% if selected_partner and selected_partner.inn == partner.inn %}selected{% endif %}>
+                        {{ partner.partner_name }} ({{ partner.director }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+       {% if selected_partner %}
+<h2>Товары через партнера: {{ selected_partner.partner_name }}</h2>
+
+        {% if products %} <!-- выборк продуктов которые относятся к партнеру-->
+        <div class="products-grid">
+            {% for item in products %}
+            <div class="product-card">
+                <h3>{{ item.product.product_name }}</h3>
+                <p><strong>Артикул:</strong> {{ item.product.article }}</p>
+                <p><strong>Тип продукции:</strong> {{ item.product.product_type.product_type }}</p>
+                <p><strong>Количество:</strong> {{ item.quantity }}</p>
+                <p><strong>Дата продажи:</strong> {{ item.sale_date|date:"d.m.Y H:i" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %} <!-- В случае если не найдено таких партнеров, у которых было что-то взято -->
+        <p class="no-products">Нет товаров, прошедших через этого партнера.</p>
+        {% endif %}
+
+        {% elif request.GET.partner_id %} <!-- Если нет такого партнера -->
+        <p class="no-products">Партнер не найден.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
